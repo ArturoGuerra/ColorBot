@@ -18,7 +18,8 @@ async def on_ready():
 async def on_color():
     await client.wait_until_ready()
     server = discord.utils.get(client.servers, id=sys.argv[2])
-    logger.info(server.name)
+    role = discord.utils.get(server.roles, id=sys.argv[3])
+    logger.info(role.name)
     while True:
         colors = (
              0x9400D3,
@@ -39,13 +40,11 @@ async def on_color():
              )
         numb = random.randint(0, len(colors) -1)
         color = discord.Colour(colors[numb])
-        for role in server.roles:
-            if not role == server.default_role:
-                try:
-                    await client.edit_role(server, role, colour=color)
-                    logger.info("{} has changed color in {}".format(role.name, server.name))
-                    await asyncio.sleep(5)
-                except:
-                    logger.info("Error changing: {} in {}".format(role.name, server.name))
+        try:
+             await client.edit_role(server, role, colour=color)
+             logger.info("{} has changed color in {}".format(role.name, server.name))
+          #  await asyncio.sleep(5)
+        except:
+             logger.info("Error changing: {} in {}".format(role.name, server.name))
 client.loop.create_task(on_color())
 client.run(sys.argv[1])
