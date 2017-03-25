@@ -43,7 +43,7 @@ async def on_color():
         try:
              await client.edit_role(server, role, colour=color)
              logger.info("{} has changed color in {}".format(role.name, server.name))
-          #  await asyncio.sleep(5)
+             await asyncio.sleep(1)
         except:
              logger.info("Error changing: {} in {}".format(role.name, server.name))
 client.loop.create_task(on_color())
