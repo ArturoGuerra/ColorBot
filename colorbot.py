@@ -34,7 +34,7 @@ async def on_ready():
              )
         numb = random.randint(0, len(colors) -1)
         color = discord.Colour(colors[numb])
-        server = discord.utils.get(client.servers, id=config['server'])
+        server = discord.utils.get(client.servers, id=sys.argv[2])
         for role in server.roles:
             if not role == server.default_role:
                 try:
