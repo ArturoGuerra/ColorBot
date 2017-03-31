@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ArturoGuerra/ColorBot.svg?branch=master)](https://travis-ci.org/ArturoGuerra/ColorBot)
 # ColorBot
 Best bot ever created !!!!
 ### How to run
