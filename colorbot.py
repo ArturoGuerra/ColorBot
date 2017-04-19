@@ -14,6 +14,14 @@ async def on_ready():
     logger.info("User Discriminator: {}".format(client.user.discriminator))
     logger.info("User ID: {}".format(client.user.id))
 
+def get_color():
+    rand_int = lambda: random.randint(0, 15)
+    rand_list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+    nums = ''
+    for i in range(6):
+        nums = nums + rand_list[rand_int()]
+    return int("0x" + nums, 16)
+
 
 async def on_color():
     await client.wait_until_ready()
@@ -21,30 +29,16 @@ async def on_color():
     role = discord.utils.get(server.roles, id=sys.argv[3])
     logger.info(role.name)
     while True:
-        colors = (
-             0x9400D3,
-             0x4B0082,
-             0x0000FF,
-             0x00FF00,
-             0xFFFF00,
-             0xFF7F00,
-             0xFF0000,
-             0xf442bc,
-             0xf4eb42,
-             0x42d4f4,
-             0x6bf442,
-             0x4265f4,
-             0xf44253,
-             0x42f4e8,
-             0xf49542,
-             )
-        numb = random.randint(0, len(colors) -1)
-        color = discord.Colour(colors[numb])
+        raw_color = get_color()
+        logger.info(raw_color)
+        color = discord.Colour(raw_color)
+        logger.info(color)
         try:
-             await client.edit_role(server, role, colour=color)
-             logger.info("{} has changed color in {}".format(role.name, server.name))
-             await asyncio.sleep(1)
-        except:
-             logger.info("Error changing: {} in {}".format(role.name, server.name))
+            await client.edit_role(server, role, colour=color)
+            logger.info("{} has changed color in {}".format(role.name, server.name))
+            await asyncio.sleep(1)
+        except Exception as e:
+            logger.error(e)
+            logger.info("Error changing: {} in {}".format(role.name, server.name))
 client.loop.create_task(on_color())
 client.run(sys.argv[1])
