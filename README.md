@@ -5,4 +5,4 @@ Best bot ever created !!!!
 `python colorbot.py <token> <server_id> <role_id>`
 
 # Disclaimer
-I'm not responsible if your account get banned for using this bot
+I'm not responsible if your account gets banned for using this bot
